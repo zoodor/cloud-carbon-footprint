@@ -94,11 +94,27 @@ describe('filterUtil', () => {
     name: 'All Accounts',
     cloudProvider: '',
   }
+
   const allAccountOptions = [
     allAccountOption,
     ...awsAccountOptions,
     ...gcpAccountOptions,
   ]
+
+  const allAccountOptionForRecommendations = {
+    key: ALL_STRING,
+    name: 'All Accounts',
+    cloudProvider: '',
+    recommendationType: '',
+    region: '',
+  }
+
+  const allAccountOptionsForRecommendations = [
+    allAccountOptionForRecommendations,
+    ...awsAccountOptions,
+    ...gcpAccountOptions,
+  ]
+
   const filterOptions: FilterOptions = {
     accounts: [
       { key: 'all', name: 'All Accounts', cloudProvider: '' },
@@ -142,7 +158,7 @@ describe('filterUtil', () => {
         ),
       )
       expect(result.cloudProviders).toEqual(allProviderOptions)
-      expect(result.accounts).toEqual(allAccountOptions)
+      expect(result.accounts).toEqual(allAccountOptionsForRecommendations)
       expect(result.services).toEqual(allServiceOptions)
     })
     it('should return all cloudProviders, accounts and services when all accounts was selected', () => {
@@ -178,7 +194,7 @@ describe('filterUtil', () => {
         ),
       ).toEqual({
         cloudProviders: allProviderOptions,
-        accounts: allAccountOptions,
+        accounts: allAccountOptionsForRecommendations,
         services: allServiceOptions,
       })
     })

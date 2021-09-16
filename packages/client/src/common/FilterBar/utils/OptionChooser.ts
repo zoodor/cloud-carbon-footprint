@@ -73,7 +73,6 @@ export abstract class OptionChooser {
     this.selections.forEach((selection) => {
       if (selection.key !== ALL_KEY) {
         this.filterOptions[filterOption].forEach((option) => {
-          console.log('###', this.selections)
           ;(option.key === selection[filterMatch] ||
             option.cloudProvider === selection.key) &&
             desiredSelections.add(option)

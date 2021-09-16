@@ -18,9 +18,27 @@ describe('Recommendations Filters', () => {
   const defaultConfig = {
     options: {
       accounts: [
-        { key: 'aws account 1', name: 'aws account 1', cloudProvider: 'aws' },
-        { key: 'gcp account 1', name: 'gcp account 1', cloudProvider: 'gcp' },
-        { key: 'gcp account 2', name: 'gcp account 2', cloudProvider: 'gcp' },
+        {
+          key: 'aws account 1',
+          name: 'aws account 1',
+          cloudProvider: 'aws',
+          region: 'aws region 1',
+          recommendationType: 'Modify',
+        },
+        {
+          key: 'gcp account 1',
+          name: 'gcp account 1',
+          cloudProvider: 'gcp',
+          region: 'gcp region 1',
+          recommendationType: 'DELETE_IMAGE',
+        },
+        {
+          key: 'gcp account 2',
+          name: 'gcp account 2',
+          cloudProvider: 'gcp',
+          region: 'gcp region 1',
+          recommendationType: 'SNAPSHOT_AND_DELETE_DISK',
+        },
       ],
       cloudProviders: [
         { key: 'aws', name: 'AWS' },
@@ -31,23 +49,31 @@ describe('Recommendations Filters', () => {
           key: 'aws region 1',
           name: 'aws region 1',
           cloudProvider: 'aws',
+          account: 'aws account 1',
+          recommendationType: 'Modify',
         },
         {
           key: 'gcp region 1',
           name: 'gcp region 1',
           cloudProvider: 'gcp',
+          account: 'gcp account 1',
+          recommendationType: 'DELETE_IMAGE',
         },
       ],
       recommendationTypes: [
         {
-          key: 'delete-image',
-          name: 'DELETE_IMAGE',
-          cloudProvider: 'gcp',
-        },
-        {
           key: 'modify',
           name: 'Modify',
           cloudProvider: 'aws',
+          account: 'aws account 1',
+          region: 'aws region 1',
+        },
+        {
+          key: 'delete-image',
+          name: 'DELETE_IMAGE',
+          cloudProvider: 'gcp',
+          account: 'gcp account 1',
+          region: 'gcp region 1',
         },
       ],
     },
@@ -98,9 +124,27 @@ describe('Recommendations Filters', () => {
   const filterOptions: FilterOptions = {
     accounts: [
       { key: 'all', name: 'All Accounts', cloudProvider: '' },
-      { key: 'aws account 1', name: 'aws account 1', cloudProvider: 'aws' },
-      { key: 'gcp account 1', name: 'gcp account 1', cloudProvider: 'gcp' },
-      { key: 'gcp account 2', name: 'gcp account 2', cloudProvider: 'gcp' },
+      {
+        key: 'aws account 1',
+        name: 'aws account 1',
+        cloudProvider: 'aws',
+        region: 'aws region 1',
+        recommendationType: 'Modify',
+      },
+      {
+        key: 'gcp account 1',
+        name: 'gcp account 1',
+        cloudProvider: 'gcp',
+        region: 'gcp region 1',
+        recommendationType: 'DELETE_IMAGE',
+      },
+      {
+        key: 'gcp account 2',
+        name: 'gcp account 2',
+        cloudProvider: 'gcp',
+        region: 'gcp region 1',
+        recommendationType: 'SNAPSHOT_AND_DELETE_DISK',
+      },
     ],
     cloudProviders: CLOUD_PROVIDER_OPTIONS,
     regions: [
@@ -109,11 +153,15 @@ describe('Recommendations Filters', () => {
         key: 'aws region 1',
         name: 'aws region 1',
         cloudProvider: 'aws',
+        account: 'aws account 1',
+        recommendationType: 'Modify',
       },
       {
         key: 'gcp region 1',
         name: 'gcp region 1',
         cloudProvider: 'gcp',
+        account: 'gcp account 1',
+        recommendationType: 'DELETE_IMAGE',
       },
     ],
     recommendationTypes: [
@@ -122,11 +170,15 @@ describe('Recommendations Filters', () => {
         key: 'delete-image',
         name: 'DELETE_IMAGE',
         cloudProvider: 'gcp',
+        account: 'gcp account 1',
+        region: 'gcp region 1',
       },
       {
         key: 'modify',
         name: 'Modify',
         cloudProvider: 'aws',
+        account: 'aws account 1',
+        region: 'aws region 1',
       },
     ],
   }
@@ -239,6 +291,8 @@ describe('Recommendations Filters', () => {
       key: 'aws account 1',
       name: 'aws account 1',
       cloudProvider: 'aws',
+      region: 'aws region 1',
+      recommendationType: 'modify',
     }
 
     const filters = new RecommendationsFilters(
@@ -340,6 +394,8 @@ describe('Recommendations Filters', () => {
       key: 'aws region 1',
       name: 'aws region 1',
       cloudProvider: 'aws',
+      recommendationType: 'modify',
+      account: 'aws account 1',
     }
 
     const filters = new RecommendationsFilters(
@@ -391,6 +447,8 @@ describe('Recommendations Filters', () => {
       key: 'delete-image',
       name: 'DELETE_IMAGE',
       cloudProvider: 'gcp',
+      account: 'gcp account 1',
+      region: 'gcp region 1',
     }
 
     const filters = new RecommendationsFilters(

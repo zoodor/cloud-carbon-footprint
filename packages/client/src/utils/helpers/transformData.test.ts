@@ -64,19 +64,35 @@ describe('transformData', () => {
 
     const expectedResult = {
       accounts: [
-        { cloudProvider: 'aws', key: testAccountA, name: testAccountA },
-        { cloudProvider: 'aws', key: testAccountB, name: testAccountB },
+        {
+          cloudProvider: 'aws',
+          key: testAccountA,
+          name: testAccountA,
+          recommendationType: 'Modify',
+          region: 'us-west-1',
+        },
+        {
+          cloudProvider: 'aws',
+          key: testAccountB,
+          name: testAccountB,
+          recommendationType: 'Terminate',
+          region: 'us-west-2',
+        },
       ],
       regions: [
         {
           cloudProvider: 'aws',
           key: 'us-west-1',
           name: 'us-west-1',
+          account: testAccountA,
+          recommendationType: 'Modify',
         },
         {
           cloudProvider: 'aws',
           key: 'us-west-2',
           name: 'us-west-2',
+          account: testAccountB,
+          recommendationType: 'Terminate',
         },
       ],
       recommendationTypes: [
@@ -84,11 +100,15 @@ describe('transformData', () => {
           cloudProvider: 'aws',
           key: 'Modify',
           name: 'Modify',
+          account: testAccountA,
+          region: 'us-west-1',
         },
         {
           cloudProvider: 'aws',
           key: 'Terminate',
           name: 'Terminate',
+          account: testAccountB,
+          region: 'us-west-2',
         },
       ],
     }
@@ -107,6 +127,8 @@ describe('transformData', () => {
           cloudProvider: 'aws',
           key: UnknownTypes.UNKNOWN_ACCOUNT,
           name: UnknownTypes.UNKNOWN_ACCOUNT,
+          recommendationType: UnknownTypes.UNKNOWN_RECOMMENDATION_TYPE,
+          region: UnknownTypes.UNKNOWN_REGION,
         },
       ],
       regions: [
@@ -114,6 +136,8 @@ describe('transformData', () => {
           cloudProvider: 'aws',
           key: UnknownTypes.UNKNOWN_REGION,
           name: UnknownTypes.UNKNOWN_REGION,
+          account: UnknownTypes.UNKNOWN_ACCOUNT,
+          recommendationType: UnknownTypes.UNKNOWN_RECOMMENDATION_TYPE,
         },
       ],
       recommendationTypes: [
@@ -121,6 +145,8 @@ describe('transformData', () => {
           cloudProvider: 'aws',
           key: UnknownTypes.UNKNOWN_RECOMMENDATION_TYPE,
           name: UnknownTypes.UNKNOWN_RECOMMENDATION_TYPE,
+          account: UnknownTypes.UNKNOWN_ACCOUNT,
+          region: UnknownTypes.UNKNOWN_REGION,
         },
       ],
     }
