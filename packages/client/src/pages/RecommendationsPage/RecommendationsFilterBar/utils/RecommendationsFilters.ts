@@ -12,7 +12,13 @@ import {
   FiltersConfig,
   unknownOptionTypes,
 } from 'Types'
-import { ALL_DROPDOWN_FILTER_OPTIONS } from 'common/FilterBar/utils/DropdownConstants'
+import {
+  ALL_ACCOUNTS_DROPDOWN_OPTION,
+  ALL_DROPDOWN_FILTER_OPTIONS,
+  ALL_RECOMMENDATION_TYPES_DROPDOWN_OPTION,
+  ALL_REGIONS_DROPDOWN_OPTION,
+  CLOUD_PROVIDER_OPTIONS,
+} from 'common/FilterBar/utils/DropdownConstants'
 import { DropdownSelections } from 'common/FilterBar/utils/FiltersUtil'
 import { OptionChooser } from 'common/FilterBar/utils/OptionChooser'
 import { AccountChooser } from './options/AccountChooser'
@@ -22,13 +28,11 @@ import { RecommendationTypeChooser } from './options/RecommendationTypeChooser'
 
 const defaultConfig: FiltersConfig = {
   options: {
-    [DropdownFilterOptions.ACCOUNTS]: [ALL_DROPDOWN_FILTER_OPTIONS.accounts],
-    [DropdownFilterOptions.CLOUD_PROVIDERS]: [
-      ALL_DROPDOWN_FILTER_OPTIONS.cloudProviders,
-    ],
-    [DropdownFilterOptions.REGIONS]: [ALL_DROPDOWN_FILTER_OPTIONS.regions],
+    [DropdownFilterOptions.CLOUD_PROVIDERS]: CLOUD_PROVIDER_OPTIONS,
+    [DropdownFilterOptions.ACCOUNTS]: [ALL_ACCOUNTS_DROPDOWN_OPTION],
+    [DropdownFilterOptions.REGIONS]: [ALL_REGIONS_DROPDOWN_OPTION],
     [DropdownFilterOptions.RECOMMENDATION_TYPES]: [
-      ALL_DROPDOWN_FILTER_OPTIONS.recommendationTypes,
+      ALL_RECOMMENDATION_TYPES_DROPDOWN_OPTION,
     ],
   },
 }

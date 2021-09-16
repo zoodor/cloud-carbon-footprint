@@ -143,6 +143,23 @@ const sumCO2 = (data: EstimationResult[]): number => {
   )
 }
 
+const unique = (dropdownOptions) => {
+  const result = []
+  dropdownOptions.filter((item) => {
+    const i = result.findIndex(
+      (x) =>
+        x.cloudProvider == item.cloudProvider &&
+        x.key == item.key &&
+        x.name == item.name,
+    )
+    if (i <= -1) {
+      result.push(item)
+    }
+    return null
+  })
+  return result
+}
+
 const useFilterDataFromEstimates = (
   data: EstimationResult[],
 ): FilterResultResponse => {
@@ -198,11 +215,19 @@ const useFilterDataFromRecommendations = (
         cloudProvider: cloudProvider?.toLowerCase(),
         key: accountName ? accountName : `${UnknownTypes.UNKNOWN_ACCOUNT}`,
         name: accountName ? accountName : `${UnknownTypes.UNKNOWN_ACCOUNT}`,
+        region: region ? region : `${UnknownTypes.UNKNOWN_REGION}`,
+        recommendationType: recommendationType
+          ? recommendationType
+          : `${UnknownTypes.UNKNOWN_RECOMMENDATION_TYPE}`,
       })
       regions.push({
         cloudProvider: cloudProvider?.toLowerCase(),
         key: region ? region : `${UnknownTypes.UNKNOWN_REGION}`,
         name: region ? region : `${UnknownTypes.UNKNOWN_REGION}`,
+        account: accountName ? accountName : `${UnknownTypes.UNKNOWN_ACCOUNT}`,
+        recommendationType: recommendationType
+          ? recommendationType
+          : `${UnknownTypes.UNKNOWN_RECOMMENDATION_TYPE}`,
       })
       recommendationTypes.push({
         cloudProvider: cloudProvider?.toLowerCase(),
@@ -212,12 +237,14 @@ const useFilterDataFromRecommendations = (
         name: recommendationType
           ? recommendationType
           : `${UnknownTypes.UNKNOWN_RECOMMENDATION_TYPE}`,
+        account: accountName ? accountName : `${UnknownTypes.UNKNOWN_ACCOUNT}`,
+        region: region ? region : `${UnknownTypes.UNKNOWN_REGION}`,
       })
     })
     setFilterResultResponse({
-      accounts: uniq(accountNames),
-      regions: uniq(regions),
-      recommendationTypes: uniq(recommendationTypes),
+      accounts: unique(accountNames),
+      regions: unique(regions),
+      recommendationTypes: unique(recommendationTypes),
     })
   }, [data, filteredData])
 

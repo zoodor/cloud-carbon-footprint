@@ -29,6 +29,8 @@ export const ALL_ACCOUNTS_DROPDOWN_OPTION: DropdownOption = {
   key: ALL_KEY,
   name: ALL_ACCOUNTS_VALUE,
   cloudProvider: '',
+  region: '',
+  recommendationType: '',
 }
 
 export const ALL_SERVICES_VALUE = 'All Services'
@@ -52,6 +54,8 @@ export const ALL_RECOMMENDATION_TYPES_DROPDOWN_OPTION: DropdownOption = {
   key: ALL_KEY,
   name: ALL_RECOMMENDATION_TYPES_VALUE,
   cloudProvider: '',
+  account: '',
+  region: '',
 }
 
 export const ALL_REGIONS_VALUE = 'All Regions'
@@ -59,6 +63,8 @@ export const ALL_REGIONS_DROPDOWN_OPTION: DropdownOption = {
   key: ALL_KEY,
   name: ALL_REGIONS_VALUE,
   cloudProvider: '',
+  account: '',
+  recommendationType: '',
 }
 
 export const ALL_DROPDOWN_FILTER_OPTIONS: AllFilterOptionMap = {

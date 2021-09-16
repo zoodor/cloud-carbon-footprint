@@ -27,6 +27,9 @@ export interface DropdownOption {
   key: string
   name: string
   cloudProvider?: string
+  account?: string
+  region?: string
+  recommendationType?: string
 }
 
 export interface AllFilterOptionMap {

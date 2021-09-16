@@ -69,10 +69,13 @@ export abstract class OptionChooser {
 
   chooseDropdownFilterOption(filterOption: string): Set<DropdownOption> {
     const desiredSelections: Set<DropdownOption> = new Set()
+    const filterMatch = filterOption.slice(0, -1)
     this.selections.forEach((selection) => {
       if (selection.key !== ALL_KEY) {
         this.filterOptions[filterOption].forEach((option) => {
-          option.cloudProvider === (selection.cloudProvider || selection.key) &&
+          console.log('###', this.selections)
+          ;(option.key === selection[filterMatch] ||
+            option.cloudProvider === selection.key) &&
             desiredSelections.add(option)
         })
       }
